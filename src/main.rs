@@ -59,7 +59,7 @@ impl Sandbox for MyApp {
                 self.app_str = app_str;
             },
             MyAppMessage::SubmitButton => {
-                self.submit_text = BASE64_STANDARD.encode(self.app_str.clone());
+                self.submit_text = BASE64_STANDARD.encode(&self.app_str);
                 self.app_str = String::from("");
                 
             }
@@ -73,9 +73,10 @@ impl Sandbox for MyApp {
             text("Input Text"),
             text_input("Any", self.app_str.as_str())
                 .on_input(MyAppMessage::UpdateAppStr)
-                .on_paste(MyAppMessage::UpdateAppStr),
+                .on_paste(MyAppMessage::UpdateAppStr)
+                .on_submit(MyAppMessage::SubmitButton),
             button("Encode").on_press(MyAppMessage::SubmitButton).padding(5),
-            text(self.submit_text.as_str()),
+            text(&self.submit_text.as_str()),
         ]
         .into()
     }
