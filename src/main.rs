@@ -2,8 +2,10 @@
 // Sandbox: 간단한 GUI 애플리케이션을 만들기 위한 트레이트
 // Settings: 애플리케이션의 설정을 관리하는 구조체
 use iced::{
-    widget::{button, column, row, text},
-    Sandbox, Settings
+    alignment::{Horizontal, Vertical},
+    font::Family,
+    widget::{button, column, row, text, text::Shaping, Text},
+    Font, Length, Sandbox, Settings
 };
 
 // 메인 함수: 프로그램의 진입점
@@ -65,6 +67,22 @@ impl Sandbox for MyApp {
     // 현재는 단순히 "Hello World" 텍스트를 표시합니다.
     fn view(&self) -> iced::Element<Self::Message> {
         column![
+            "Construct from &str",
+            text("Construct from struct"),
+            Text::new("Construct from struct"),
+            text("Different Font").font(Font{
+                family: Family::Fantasy,
+                ..Font::DEFAULT
+            }),
+            text("Larget text").size(24),
+            text("Speccial character 🐤").shaping(Shaping::Advanced),
+            text("Center")
+                .width(Length::Fill)
+                .horizontal_alignment(Horizontal::Center),
+            text("Vertical center")
+                .height(Length::Fill)
+                .vertical_alignment(Vertical::Center),
+            text("\n\n\n\n"),
             text("+ or -"),
             text(self.counter),
             row![
