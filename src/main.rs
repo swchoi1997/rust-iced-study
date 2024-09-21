@@ -4,7 +4,7 @@
 use iced::{
     alignment::{Horizontal, Vertical},
     font::Family,
-    widget::{button, column, row, text, text::Shaping, Text},
+    widget::{button, column, row, text, text::Shaping, Text, Button},
     Font, Length, Sandbox, Settings
 };
 
@@ -67,28 +67,13 @@ impl Sandbox for MyApp {
     // 현재는 단순히 "Hello World" 텍스트를 표시합니다.
     fn view(&self) -> iced::Element<Self::Message> {
         column![
-            "Construct from &str",
-            text("Construct from struct"),
-            Text::new("Construct from struct"),
-            text("Different Font").font(Font{
-                family: Family::Fantasy,
-                ..Font::DEFAULT
-            }),
-            text("Larget text").size(24),
-            text("Speccial character 🐤").shaping(Shaping::Advanced),
-            text("Center")
-                .width(Length::Fill)
-                .horizontal_alignment(Horizontal::Center),
-            text("Vertical center")
-                .height(Length::Fill)
-                .vertical_alignment(Vertical::Center),
-            text("\n\n\n\n"),
             text("+ or -"),
             text(self.counter),
             row![
-                button("+").on_press(MyAppMessage::PlusButtonPressed),
-                button("-").on_press(MyAppMessage::MinusButtonPressed),
-            ]
+                button("+").on_press(MyAppMessage::PlusButtonPressed).padding(10),
+                button("-").on_press(MyAppMessage::MinusButtonPressed).padding(10),
+            ],
+            Button::new("Disable button"),
         ].into()
     }
 }
